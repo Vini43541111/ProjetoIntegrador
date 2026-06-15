@@ -1,13 +1,11 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-// TODO [S2] Middleware de autenticação JWT entre módulos.
-// Valida o token enviado no header Authorization: Bearer <token>.
 function autenticarJWT(req, res, next) {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return res.json({ status: 'error', message: 'Token nao fornecido' });
+    return res.status(401).json({ status: 'error', message: 'Token nao fornecido' });
   }
 
   const token = authHeader.split(' ')[1];
@@ -17,7 +15,7 @@ function autenticarJWT(req, res, next) {
     req.usuario = payload;
     next();
   } catch (err) {
-    return res.json({ status: 'error', message: 'Token invalido' });
+    return res.status(401).json({ status: 'error', message: 'Token invalido ou expirado' });
   }
 }
 
