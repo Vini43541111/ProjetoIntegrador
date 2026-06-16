@@ -65,7 +65,7 @@ BEGIN
   END IF;
 
   RETURN QUERY
-  SELECT rc.tipo_cobertura, rc.percentual, v_plano_nome
+  SELECT rc.tipo_cobertura::VARCHAR, rc.percentual, v_plano_nome
   FROM regra_cobertura rc
   WHERE rc.plano_id = v_plano_id
     AND rc.procedimento = p_procedimento;
