@@ -109,10 +109,24 @@ async function consultar(req, res) {
       });
     }
 
-    return res.json({ status: 'success', data: vinculo });
+    let paciente = null;
+    try {
+      paciente = await g1Client.buscarPaciente(pacienteId);
+    } catch (_) {}
+
+    return res.json({ status: 'success', data: { ...vinculo.toJSON(), paciente } });
   } catch (err) {
     return res.status(500).json({ status: 'error', message: err.message });
   }
 }
 
-module.exports = { vincular, atualizar, consultar };
+async function buscarPaciente(req, res) {
+  try {
+    const paciente = await g1Client.buscarPaciente(req.params.id);
+    return res.json({ status: 'success', data: paciente });
+  } catch (err) {
+    return res.status(err.status || 503).json({ status: 'error', message: err.message });
+  }
+}
+
+module.exports = { vincular, atualizar, consultar, buscarPaciente };

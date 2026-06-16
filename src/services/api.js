@@ -27,6 +27,7 @@ export const planosApi = {
 };
 
 export const vinculoApi = {
+  buscarPaciente: (pacienteId) => request(`/api/pacientes/${pacienteId}`),
   vincular: (pacienteId, planoId) =>
     request(`/api/pacientes/${pacienteId}/plano`, {
       method: "POST",
