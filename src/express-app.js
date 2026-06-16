@@ -11,8 +11,8 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', modulo: 'G9 - Convenios' });
 });
 
-app.use('/planos', planoRoutes);
-app.use('/pacientes', vinculoRoutes);
-app.use('/cobertura', coberturaRoutes);
+app.use('/api/planos', planoRoutes);
+app.use('/api/pacientes', vinculoRoutes);
+app.use('/api/cobertura', coberturaRoutes);
 
 module.exports = app;

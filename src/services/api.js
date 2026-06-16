@@ -15,12 +15,12 @@ async function request(path, options = {}) {
 export const planosApi = {
   listar: (filtros = {}) => {
     const qs = new URLSearchParams(filtros).toString();
-    return request(`/planos${qs ? `?${qs}` : ""}`);
+    return request(`/api/planos${qs ? `?${qs}` : ""}`);
   },
   cadastrar: (plano) =>
-    request("/planos", { method: "POST", body: JSON.stringify(plano) }),
+    request("/api/planos", { method: "POST", body: JSON.stringify(plano) }),
   alterarStatus: (id, status) =>
-    request(`/planos/${id}/status`, {
+    request(`/api/planos/${id}/status`, {
       method: "PATCH",
       body: JSON.stringify({ status }),
     }),
@@ -28,22 +28,22 @@ export const planosApi = {
 
 export const vinculoApi = {
   vincular: (pacienteId, planoId) =>
-    request(`/pacientes/${pacienteId}/plano`, {
+    request(`/api/pacientes/${pacienteId}/plano`, {
       method: "POST",
       body: JSON.stringify({ plano_id: planoId }),
     }),
   atualizar: (pacienteId, planoId) =>
-    request(`/pacientes/${pacienteId}/plano`, {
+    request(`/api/pacientes/${pacienteId}/plano`, {
       method: "PUT",
       body: JSON.stringify({ plano_id: planoId }),
     }),
-  consultar: (pacienteId) => request(`/pacientes/${pacienteId}/plano`),
+  consultar: (pacienteId) => request(`/api/pacientes/${pacienteId}/plano`),
 };
 
 export const coberturaApi = {
   validar: (paciente, procedimento) =>
     request(
-      `/cobertura?paciente=${paciente}&procedimento=${encodeURIComponent(
+      `/api/cobertura?paciente=${paciente}&procedimento=${encodeURIComponent(
         procedimento
       )}`
     ),
