@@ -32,6 +32,11 @@ export const vinculoApi = {
       method: "POST",
       body: JSON.stringify({ plano_id: planoId }),
     }),
+  atualizar: (pacienteId, planoId) =>
+    request(`/pacientes/${pacienteId}/plano`, {
+      method: "PUT",
+      body: JSON.stringify({ plano_id: planoId }),
+    }),
   consultar: (pacienteId) => request(`/pacientes/${pacienteId}/plano`),
 };
 
